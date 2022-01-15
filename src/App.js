@@ -16,12 +16,13 @@ function App() {
 
 const [employees, setEmployees] = useState([]);
 const [expanded, setExpanded] = useState(false);
+// const [expandAll, setExpandAll] = useState(false);
 
 
 
 useEffect(() => {
   getEmployees();
-}, []);
+}, [expanded]);
 
 
 const getEmployees = async () => {
@@ -30,14 +31,23 @@ const getEmployees = async () => {
   if(!employees.length) setEmployees(res.employees);
 };
 
+const showAllInfo = () =>setExpanded(true);
+const minimizeAllInfo = () =>setExpanded(false);
 
 
   return (
     <div>
       <header>
         <h1>Employees</h1>
+        <button
+          onClick={showAllInfo}
+          >Expand All Employees</button>
+        <button
+          onClick={minimizeAllInfo}
+          >Minimize All Employees</button>
         {employees?.map((person, i) => {
           person.expanded = expanded;
+          // person.expandAll = expandAll;
           return <Employee key={i} employee={person}/>
         })}
       </header>

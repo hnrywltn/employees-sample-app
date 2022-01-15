@@ -1,21 +1,70 @@
-import { useState } from 'react';
-// import EditResourceForm from './EditResourceForm.js';
-// import { useDispatch } from 'react-redux';
-// import {deleteResourceById, getResources} from '../../store/resource.js';
-// import '../Home/Home.css';
+import { useState, useEffect } from 'react';
+
 
 
 function Employee({employee}) {
-//   const [showform, setShowform] = useState(false);
+
+  const [expandedInfo, setExpandedInfo] = useState(employee.expanded);
+  const [showform, setShowform] = useState(false);
 
 
-//   const dispatch = useDispatch();
-  let dom = <p>{employee.firstName}</p>
+  useEffect(() => {
+    setExpandedInfo(employee.expanded)
+  }, [employee.expanded])
 
 
-//   const editClick = () => {
-//     setShowform(true);
-//   };
+  const showInfo = () => setExpandedInfo(!expandedInfo)
+  const editClick = () => setShowform(true);
+
+
+  const saveClick = () => {
+    setShowform(false);
+  };
+
+
+
+
+  let dom = (
+    <div>
+        <img className='profilePic' src={employee.avatar} alt={`${employee.firstName}'s profile`} />
+        <button
+          onClick={showInfo}
+          >Expand</button>
+        <button
+          onClick={editClick}
+          >Edit</button>
+        <h4>{employee.firstName} {employee.lastName}</h4>
+    </div>
+  );
+
+  if(expandedInfo) {
+      dom = (
+          <div>
+              <img className='profilePic' src={employee.avatar} alt={`${employee.firstName}'s profile`} />
+              <button
+                onClick={showInfo}
+                >Minimize</button>
+              <button
+                onClick={editClick}
+                >Edit</button>
+              <h4>{employee.firstName} {employee.lastName}</h4>
+          </div>
+      );
+    };
+
+
+
+    if(showform) {
+        dom = (
+          <div>
+              PUT A FORM HERE!
+              <button
+                onClick={saveClick}
+                >Save</button>
+          </div>
+      );
+  }
+
 
 
 //   const deleteClick = async (e) => {
@@ -25,46 +74,10 @@ function Employee({employee}) {
 //   };
 
 
-console.log(employee)
-
-//   if(resource.user_id) {
-//     dom = (
-//       <div className="resource" key={resource.id}>
-//         <a href={resource.ref_link} target="blank">{resource.name}</a>
-//         <p>{resource.description}</p>
-//         <button
-//           onClick={editClick}
-//         >
-//           edit
-//         </button>
-//         <button
-//           onClick={deleteClick}
-//         >
-//           delete
-//         </button>
-//       </div>
-//     );
-//   };
-
-//   if(!resource.user_id) {
-//     dom = (
-//       <div className="resource" key={resource.id}>
-//         <a href={resource.ref_link} target="blank">{resource.name}</a>
-//         <p>{resource.description}</p>
-//       </div>
-//     );
-//   };
-
-//   if(resource.user_id && showform) {
-//     dom = (
-//       <EditResourceForm resource={resource} setShowform={setShowform}/>
-//     );
-//   };
 
 
 
 
-  // console.log(resource.id);
   return dom;
 }
 
