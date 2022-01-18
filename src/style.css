@@ -1,3 +1,15 @@
 .profilePic {
-    width: 15vmin;
+    width: 10vmin;
+}
+
+
+#deleteButton {
+    background-image: url('https://i.imgur.com/nRqOj4K.png');
+    /* background-repeat: none; */
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    width: 5vmin;
+    height: 5vmin;
+    cursor: pointer;
 }

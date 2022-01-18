@@ -42,6 +42,8 @@ export function makeServer({ environment = "test" } = {}) {
           const attrs = JSON.parse(request.requestBody);
           const employee = schema.employees.find(request.params.id);
           employee.update(attrs);
+          console.log(employee)
+          return employee.attrs;
         },
         { timing: 300 }
       );

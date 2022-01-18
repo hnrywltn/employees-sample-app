@@ -1,8 +1,16 @@
 import { useState, useEffect } from 'react';
+// import { useHistory } from 'react-router-dom';
+import { editEmployee, getEmployees, deleteEmployeeById } from './store/employee';
+import { useDispatch } from 'react-redux'
+
 
 
 
 function Employee({employee}) {
+
+  const dispatch = useDispatch();
+
+//   const history = useHistory();
 
   const [expandedInfo, setExpandedInfo] = useState(employee.expanded);
   const [showform, setShowform] = useState(false);
@@ -13,14 +21,11 @@ function Employee({employee}) {
   const [bio, setBio] = useState(employee.bio)
   const [phone, setPhone] = useState(employee.phone)
 
+
   const [zipCode, setZipCode] = useState(employee.address.zipCode)
   const [city, setCity] = useState(employee.address.city)
   const [state, setState] = useState(employee.address.state)
   const [streetAddress, setStreetAddress] = useState(employee.address.streetAddress)
-
-
-
-  console.log(employee)
 
 
   useEffect(() => {
@@ -28,8 +33,6 @@ function Employee({employee}) {
   }, [employee.expanded])
 
 
-  const showInfo = () => setExpandedInfo(!expandedInfo)
-  const editClick = () => setShowform(true);
 
 
   const updateFirstName = (e) => setFirstName(e.target.value);
@@ -37,15 +40,38 @@ function Employee({employee}) {
   const updateBio = (e) => setBio(e.target.value);
   const updateEmail = (e) => setEmail(e.target.value);
   const updatePhone = (e) => setPhone(e.target.value);
-  const updateStreetAddress = (e) => setStreetAddress(e.taget.value);
-  const updateZipCode = (e) => setZipCode(e.taget.value);
-  const updateCity = (e) => setCity(e.taget.value);
-  const updateState = (e) => setState(e.taget.value);
 
 
-  const saveClick = () => {
+  const updateStreetAddress = (e) => setStreetAddress(e.target.value);
+  const updateZipCode = (e) => setZipCode(e.target.value);
+  const updateCity = (e) => setCity(e.target.value);
+  const updateState = (e) => setState(e.target.value);
+
+
+
+
+
+  const showInfo = () => setExpandedInfo(!expandedInfo)
+  const editClick = () => setShowform(true);
+  const deleteClick = (e) => dispatch(deleteEmployeeById(employee.id));
+
+
+  const saveClick = async () => {
+    employee.firstName = firstName;
+    employee.lastName = lastName;
+    employee.address = {
+        streetAddress,
+        city,
+        state,
+        zipCode
+    };
+    employee.bio = bio;
+    employee.email = email;
+    employee.phone = phone;
+    dispatch(editEmployee(employee));
     setShowform(false);
   };
+
 
 
 
@@ -67,6 +93,7 @@ function Employee({employee}) {
       dom = (
           <div>
               <img className='profilePic' src={employee.avatar} alt={`${firstName}'s profile`} />
+              <button id='deleteButton' onClick={deleteClick} />
               <button
                 onClick={showInfo}
                 >Minimize</button>

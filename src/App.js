@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import Employee from './Employee';
 import { makeServer } from "./server";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getEmployees } from './store/employee.js';
 
 if (process.env.NODE_ENV === "development") {
   makeServer({ environment: "development" });
@@ -14,45 +17,45 @@ if (process.env.NODE_ENV === "development") {
 
 function App() {
 
-const [employees, setEmployees] = useState([]);
-const [expanded, setExpanded] = useState(false);
-// const [expandAll, setExpandAll] = useState(false);
+  const dispatch = useDispatch();
+  const employees = useSelector(state => state.employees);
 
 
+  const [expanded, setExpanded] = useState(false);
 
-useEffect(() => {
-  getEmployees();
-}, [expanded]);
-
-
-const getEmployees = async () => {
-  let json = await fetch('api/employees');
-  let res = await json.json()
-  if(!employees.length) setEmployees(res.employees);
-};
-
-const showAllInfo = () =>setExpanded(true);
-const minimizeAllInfo = () =>setExpanded(false);
+  useEffect(() => {
+    dispatch(getEmployees());
+  }, [expanded, dispatch]);
 
 
-  return (
-    <div>
-      <header>
-        <h1>Employees</h1>
-        <button
-          onClick={showAllInfo}
-          >Expand All Employees</button>
-        <button
-          onClick={minimizeAllInfo}
-          >Minimize All Employees</button>
-        {employees?.map((person, i) => {
-          person.expanded = expanded;
-          // person.expandAll = expandAll;
-          return <Employee key={i} employee={person}/>
-        })}
-      </header>
-    </div>
-  );
+  const showAllInfo = () =>setExpanded(true);
+  const minimizeAllInfo = () =>setExpanded(false);
+
+
+    return (
+
+      <BrowserRouter>
+      <Switch>
+      <Route path='/'>
+        <div>
+          <header>
+            <h1>fxdghdfgsEmployees</h1>
+            <button
+              onClick={showAllInfo}
+              >Expand All Employees</button>
+            <button
+              onClick={minimizeAllInfo}
+              >Minimize All Employees</button>
+            {Object.values(employees)?.map((person, i) => {
+              person.expanded = expanded;
+              return <Employee key={person.id} employee={person}/>
+            })}
+          </header>
+        </div>
+      </Route>
+      </Switch>
+      </BrowserRouter>
+    );
 }
 
 export default App;
