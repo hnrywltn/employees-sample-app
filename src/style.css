@@ -1,15 +1,301 @@
-.profilePic {
-    width: 10vmin;
+body {
+    background-color: rgba(0, 0, 128, 0.767);
+    box-sizing: border-box;
+}
+
+button {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#root {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+    grid-template-rows: auto;
+    padding: 1vmin;
+    font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#root h1 {
+    display: flex;
+    /* grid-column: 1 / 3; */
+    justify-content: center;
+    color: oldlace;
+    font-size: 4vmin;
+}
+
+.siteBttn {
+    font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+    display: flex;
+    font-size: 1em;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 4vmin;
+    height: 4vmin;
+    margin: 1vmin;
+    color: rgba(0, 0, 128, 0.986);
 }
 
 
-#deleteButton {
+.employeeContainer {
+    background-color: rgb(255, 246, 246);
+    height: 8vmin;
+    display: grid;
+    padding: 1vmin;
+    margin: .25vmin;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(4, 25%);
+    border: .02em solid rgba(0, 0, 128, 0.102);
+}
+
+.expandedEmployeeContainer {
+    background-color: rgb(255, 246, 246);
+    height: 30vmin;
+    display: grid;
+    padding: 1vmin;
+    margin: .25vmin;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(4, 25%);
+    color: rgba(0, 0, 128, 0.986);
+    border: .02em solid rgba(0, 0, 128, 0.102);
+}
+
+.employeeFormContainer {
+    background-color: rgb(255, 246, 246);
+    height: 45vmin;
+    padding: 1vmin;
+    margin: .25vmin;
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(4, 25%);
+    color: rgba(0, 0, 128, 0.986);
+    border: 1em solid rgb(206, 3, 37);
+    padding: 1vmin;
+}
+
+
+.fDeleteBttn {
     background-image: url('https://i.imgur.com/nRqOj4K.png');
-    /* background-repeat: none; */
     background-size: cover;
-    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
     border: none;
-    width: 5vmin;
-    height: 5vmin;
+    width: 8vmin;
+    background-color: transparent;
+}
+
+form {
+    display: grid;
+    grid-row: 2 / 5;
+    grid-column: 1 / end;
+    grid-template-columns: repeat(20, 5%);
+    grid-template-rows: repeat(4, 25%);
+}
+
+.fSave {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    font-weight: bold;
+}
+
+label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.lFirstName {
+    grid-row: 1 / 2;
+    grid-column: 2 / 5;
+}
+
+.fFirstName {
+    grid-row: 2 / 3;
+    grid-column: 2 / 5;
+}
+
+.lLastName {
+    grid-row: 3 / 4;
+    grid-column: 2 / 5;
+}
+
+.fLastName {
+    grid-row: 4 / 5;
+    grid-column: 2 / 5;
+}
+
+.lEmail {
+    grid-row: 1 / 2;
+    grid-column: 6 / 10;
+}
+
+.fEmail {
+    grid-row: 2 / 3;
+    grid-column: 6 / 10;
+}
+
+.lPhone {
+    grid-row: 3 / 4;
+    grid-column: 6 / 10;
+}
+
+.fPhone {
+    grid-row: 4 / 5;
+    grid-column: 6 / 10;
+}
+
+.lAddress {
+    grid-row: 1 / 2;
+    grid-column: 11 / 15;
+}
+
+.fAddress {
+    grid-row: 2 / 5;
+    grid-column: 11 / 15;
+}
+
+.fAddress input {
+    width: 100%;
+    height: 10%;
+}
+
+.lBio {
+    grid-row: 1 / 2;
+    grid-column: 16 / 20;
+}
+
+.fBio {
+    grid-row: 2 / 5;
+    grid-column: 16 / 20;
+}
+
+input, textarea {
+    border-radius: 1vmin;
+    margin: 1vmin;
+}
+
+.expandedName {
+    grid-row: 1 / 2;
+    grid-column: 3 / 11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.75vmin;
+    color: rgba(0, 0, 128, 0.986);
+}
+
+.expandedProfilePic {
+    width: 10vmin;
+    grid-row: 1 / 3;
+    grid-column: 2 / 3;
+}
+
+.eEmail {
+    grid-row: 2 / 3;
+    grid-column: 4 / 7;
+}
+
+.ePhone {
+    grid-row: 2 / 3;
+    grid-column: 7 / 11;
+}
+
+.eAddress {
+    grid-row: 3 / 5;
+    grid-column: 4 / 7;
+}
+
+.eBio {
+    grid-row: 3 / 5;
+    grid-column: 7 / 11;
+}
+
+.expandedDeleteBttn {
+    background-image: url('https://i.imgur.com/nRqOj4K.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    grid-row: 3 / 5;
+    grid-column: 2 / 3;
+    border: none;
+    width: 8vmin;
+    background-color: transparent;
+}
+
+.expandedEdit {
+    grid-row: 3 / 5;
+    grid-column: 1 / 2;
+    font-size: 1.5vmin;
+}
+
+.minimize {
+    grid-row: 1 / 3;
+    grid-column: 1 / 2;
+    font-size: 1.5vmin;
+}
+
+
+
+
+
+.profilePic {
+    width: 10vmin;
+    grid-row: 1 / 3;
+    grid-column: 1/2;
+}
+
+.name {
+    grid-row: 1 / 3;
+    grid-column: 3 / 11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.75vmin;
+    color: rgba(0, 0, 128, 0.986);
+}
+
+.editBttn {
+    grid-row: 3 / 5;
+    grid-column: 3 / 7;
+    font-size: 1.5vmin;
+}
+
+.expandBttn {
+    grid-row: 3 / 5;
+    grid-column: 7 / 11;
+    font-size: 1.5vmin;
+}
+
+.deleteBttn {
+    background-image: url('https://i.imgur.com/nRqOj4K.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    grid-row: 1 / 5;
+    grid-column: 2 / 3;
+    border: none;
+    width: 8vmin;
+    background-color: transparent;
+}
+
+.bttn {
     cursor: pointer;
+    font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+    display: flex;
+    font-size: .75em;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 4vmin;
+    background-color: rgba(0, 0, 128, 0.102);
+    margin: .3vmin;
+    color: rgb(0, 0, 128);
 }

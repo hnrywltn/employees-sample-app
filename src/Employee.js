@@ -10,7 +10,6 @@ function Employee({employee}) {
 
   const dispatch = useDispatch();
 
-//   const history = useHistory();
 
   const [expandedInfo, setExpandedInfo] = useState(employee.expanded);
   const [showform, setShowform] = useState(false);
@@ -77,34 +76,39 @@ function Employee({employee}) {
 
 
   let dom = (
-    <div>
+    <div className='employeeContainer'>
+        <h4 className='name'>{firstName} {lastName}</h4>
         <img className='profilePic' src={employee.avatar} alt={`${firstName}'s profile`} />
         <button
           onClick={showInfo}
+          className='expandBttn bttn'
           >Expand</button>
         <button
+          className='editBttn bttn'
           onClick={editClick}
           >Edit</button>
-        <h4>{firstName} {lastName}</h4>
+          <button className='deleteBttn' onClick={deleteClick} />
     </div>
   );
 
   if(expandedInfo) {
       dom = (
-          <div>
-              <img className='profilePic' src={employee.avatar} alt={`${firstName}'s profile`} />
-              <button id='deleteButton' onClick={deleteClick} />
+          <div className='expandedEmployeeContainer'>
+              <img className='expandedProfilePic' src={employee.avatar} alt={`${firstName}'s profile`} />
+              <button className='expandedDeleteBttn' onClick={deleteClick} />
               <button
+                className='minimize bttn'
                 onClick={showInfo}
                 >Minimize</button>
               <button
+                className='expandedEdit bttn'
                 onClick={editClick}
                 >Edit</button>
-              <h4>{firstName} {lastName}</h4>
-              <p>{email}</p>
-              <p>{streetAddress} {city}, {state} {zipCode}</p>
-              <p>{phone}</p>
-              <p>{bio}</p>
+              <h4 className='expandedName'>{firstName} {lastName}</h4>
+              <p className='eEmail'><strong>Email: </strong>{email}</p>
+              <p className='eAddress'><strong>Address: </strong>{streetAddress} {city}, {state} {zipCode}</p>
+              <p className='ePhone'><strong>Phone: </strong>{phone}</p>
+              <p className='eBio'><strong>Bio: </strong>{bio}</p>
 
           </div>
       );
@@ -113,13 +117,20 @@ function Employee({employee}) {
 
 
     if(showform) {
-        dom = (
-          <div>
-              PUT A FORM HERE!
+      dom = (
+        <div className='employeeFormContainer'>
+
+              <h4 className='expandedName'>{firstName} {lastName}</h4>
+              <button className='fDeleteBttn' onClick={deleteClick} />
+              <button
+                onClick={saveClick}
+                className='bttn fSave'
+                >Save</button>
               <form
               onSubmit={saveClick}>
-                  <label>First Name</label>
+                  <label className='lFirstName'>First Name</label>
                   <input
+                    className='fFirstName'
                     type='text'
                     placeholder='First Name'
                     required
@@ -127,8 +138,9 @@ function Employee({employee}) {
                     value={firstName}
                   />
 
-                  <label>Last Name</label>
+                  <label className='lLastName'>Last Name</label>
                   <input
+                    className='fLastName'
                     type='text'
                     placeholder='Last Name'
                     required
@@ -136,33 +148,36 @@ function Employee({employee}) {
                     value={lastName}
                   />
 
-                  <label>Email</label>
+                  <label className='lEmail'>Email</label>
                   <input
                     type='email'
+                    className='fEmail'
                     placeholder='Email'
                     required
                     onChange={updateEmail}
                     value={email}
                   />
 
-                  <label>Phone</label>
+                  <label className='lPhone'>Phone</label>
                   <input
                     type='text'
+                    className='fPhone'
                     placeholder='Phone Number with Extension'
                     required
                     onChange={updatePhone}
                   />
 
-                  <label>Bio</label>
+                  <label className='lBio'>Bio</label>
                   <textarea
                     placeholder='Biography'
+                    className='fBio'
                     required
                     value={bio}
                     onChange={updateBio}
                   />
 
-                  <label>Address</label>
-                  <div>
+                  <label className='lAddress'>Address</label>
+                  <div className='fAddress'>
                       <input
                         type='text'
                         placeholder='Street Address'
@@ -194,10 +209,9 @@ function Employee({employee}) {
                   </div>
 
 
+
               </form>
-              <button
-                onClick={saveClick}
-                >Save</button>
+
           </div>
       );
   }

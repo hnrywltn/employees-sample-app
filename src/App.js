@@ -32,26 +32,25 @@ function App() {
   const minimizeAllInfo = () =>setExpanded(false);
 
 
+
     return (
 
       <BrowserRouter>
       <Switch>
       <Route path='/'>
-        <div>
-          <header>
-            <h1>fxdghdfgsEmployees</h1>
-            <button
-              onClick={showAllInfo}
-              >Expand All Employees</button>
-            <button
-              onClick={minimizeAllInfo}
-              >Minimize All Employees</button>
-            {Object.values(employees)?.map((person, i) => {
-              person.expanded = expanded;
-              return <Employee key={person.id} employee={person}/>
-            })}
-          </header>
-        </div>
+        <h1>Employees</h1>
+        <button
+          className='siteBttn'
+          onClick={showAllInfo}
+          >Expand All Employees</button>
+        <button
+          className='siteBttn'
+          onClick={minimizeAllInfo}
+          >Minimize All Employees</button>
+        {Object.values(employees)?.map((person, i) => {
+          person.expanded = expanded;
+          return <Employee key={person.id} employee={person}/>
+        })}
       </Route>
       </Switch>
       </BrowserRouter>
