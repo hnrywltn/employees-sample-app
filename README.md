@@ -29,3 +29,6 @@ A few helpful tips:
 
 ## Miscellaneous Information
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). If you run into any issues with running the app, you can check out the Create React App documentation for more information.
+
+## Dev Notes
+This app pulls 10 employees with a fetch call to a Mirage server. A user initially sees a compressed list and can expand and shrink as desired. It can make `PATCH` (edit button),`PULL` (on load), and `DELETE` (the delete icon) requests by following the UI.
